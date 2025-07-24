@@ -586,26 +586,61 @@ if [ ! -f "$DISK3_FILE.img" ]; then
 fi
 
 DISK4_FILE="/storage4/${DISK_NAME}4"
+DISK5_FILE="/storage5/${DISK_NAME}5"
+DISK6_FILE="/storage6/${DISK_NAME}6"
+DISK7_FILE="/storage7/${DISK_NAME}7"
+DISK8_FILE="/storage8/${DISK_NAME}8"
+DISK9_FILE="/storage9/${DISK_NAME}9"
+DISK10_FILE="/storage10/${DISK_NAME}10"
+DISK11_FILE="/storage11/${DISK_NAME}11"
 
 : "${DISK2_SIZE:=""}"
 : "${DISK3_SIZE:=""}"
 : "${DISK4_SIZE:=""}"
+: "${DISK5_SIZE:=""}"
+: "${DISK6_SIZE:=""}"
+: "${DISK7_SIZE:=""}"
+: "${DISK8_SIZE:=""}"
+: "${DISK9_SIZE:=""}"
+: "${DISK10_SIZE:=""}"
+: "${DISK11_SIZE:=""}"
 
 : "${DEVICE:=""}"        # Docker variables to passthrough a block device, like /dev/vdc1.
 : "${DEVICE2:=""}"
 : "${DEVICE3:=""}"
 : "${DEVICE4:=""}"
+: "${DEVICE5:=""}"
+: "${DEVICE6:=""}"
+: "${DEVICE7:=""}"
+: "${DEVICE8:=""}"
+: "${DEVICE9:=""}"
+: "${DEVICE10:=""}"
+: "${DEVICE11:=""}"
 
-[ -z "$DEVICE" ] && [ -b "/disk" ] && DEVICE="/disk"
-[ -z "$DEVICE" ] && [ -b "/disk1" ] && DEVICE="/disk1"
-[ -z "$DEVICE2" ] && [ -b "/disk2" ] && DEVICE2="/disk2"
-[ -z "$DEVICE3" ] && [ -b "/disk3" ] && DEVICE3="/disk3"
-[ -z "$DEVICE4" ] && [ -b "/disk4" ] && DEVICE4="/disk4"
+[ -z "$DEVICE" ]    && [ -b "/disk" ]    && DEVICE="/disk"
+[ -z "$DEVICE" ]    && [ -b "/disk1" ]   && DEVICE="/disk1"
+[ -z "$DEVICE2" ]   && [ -b "/disk2" ]   && DEVICE2="/disk2"
+[ -z "$DEVICE3" ]   && [ -b "/disk3" ]   && DEVICE3="/disk3"
+[ -z "$DEVICE4" ]   && [ -b "/disk4" ]   && DEVICE4="/disk4"
+[ -z "$DEVICE5" ]   && [ -b "/disk5" ]   && DEVICE5="/disk5"
+[ -z "$DEVICE6" ]   && [ -b "/disk6" ]   && DEVICE6="/disk6"
+[ -z "$DEVICE7" ]   && [ -b "/disk7" ]   && DEVICE7="/disk7"
+[ -z "$DEVICE8" ]   && [ -b "/disk8" ]   && DEVICE8="/disk8"
+[ -z "$DEVICE9" ]   && [ -b "/disk9" ]   && DEVICE9="/disk9"
+[ -z "$DEVICE10" ]  && [ -b "/disk10" ]  && DEVICE10="/disk10"
+[ -z "$DEVICE11" ]  && [ -b "/disk11" ]  && DEVICE11="/disk11"
 
-[ -z "$DEVICE" ] && [ -b "/dev/disk1" ] && DEVICE="/dev/disk1"
-[ -z "$DEVICE2" ] && [ -b "/dev/disk2" ] && DEVICE2="/dev/disk2"
-[ -z "$DEVICE3" ] && [ -b "/dev/disk3" ] && DEVICE3="/dev/disk3"
-[ -z "$DEVICE4" ] && [ -b "/dev/disk4" ] && DEVICE4="/dev/disk4"
+[ -z "$DEVICE" ]    && [ -b "/dev/disk1" ]   && DEVICE="/dev/disk1"
+[ -z "$DEVICE2" ]   && [ -b "/dev/disk2" ]   && DEVICE2="/dev/disk2"
+[ -z "$DEVICE3" ]   && [ -b "/dev/disk3" ]   && DEVICE3="/dev/disk3"
+[ -z "$DEVICE4" ]   && [ -b "/dev/disk4" ]   && DEVICE4="/dev/disk4"
+[ -z "$DEVICE5" ]   && [ -b "/dev/disk5" ]   && DEVICE5="/dev/disk5"
+[ -z "$DEVICE6" ]   && [ -b "/dev/disk6" ]   && DEVICE6="/dev/disk6"
+[ -z "$DEVICE7" ]   && [ -b "/dev/disk7" ]   && DEVICE7="/dev/disk7"
+[ -z "$DEVICE8" ]   && [ -b "/dev/disk8" ]   && DEVICE8="/dev/disk8"
+[ -z "$DEVICE9" ]   && [ -b "/dev/disk9" ]   && DEVICE9="/dev/disk9"
+[ -z "$DEVICE10" ]  && [ -b "/dev/disk10" ]  && DEVICE10="/dev/disk10"
+[ -z "$DEVICE11" ]  && [ -b "/dev/disk11" ]  && DEVICE11="/dev/disk11"
 
 if [ -n "$DEVICE" ]; then
   addDevice "$DEVICE" "$DISK_TYPE" "3" "0xc" || exit $?
@@ -629,6 +664,48 @@ if [ -n "$DEVICE4" ]; then
   addDevice "$DEVICE4" "$DISK_TYPE" "6" "0xf" || exit $?
 else
   addDisk "$DISK4_FILE" "$DISK_TYPE" "disk4" "$DISK4_SIZE" "6" "0xf" "$DISK_FMT" "$DISK_IO" "$DISK_CACHE" || exit $?
+fi
+
+if [ -n "$DEVICE5" ]; then
+  addDevice "$DEVICE5" "$DISK_TYPE" "7" "0x10" || exit $?
+else
+  addDisk "$DISK5_FILE" "$DISK_TYPE" "disk5" "$DISK5_SIZE" "7" "0x10" "$DISK_FMT" "$DISK_IO" "$DISK_CACHE" || exit $?
+fi
+
+if [ -n "$DEVICE6" ]; then
+  addDevice "$DEVICE6" "$DISK_TYPE" "8" "0x11" || exit $?
+else
+  addDisk "$DISK6_FILE" "$DISK_TYPE" "disk6" "$DISK6_SIZE" "8" "0x11" "$DISK_FMT" "$DISK_IO" "$DISK_CACHE" || exit $?
+fi
+
+if [ -n "$DEVICE7" ]; then
+  addDevice "$DEVICE7" "$DISK_TYPE" "9" "0x12" || exit $?
+else
+  addDisk "$DISK7_FILE" "$DISK_TYPE" "disk7" "$DISK7_SIZE" "9" "0x12" "$DISK_FMT" "$DISK_IO" "$DISK_CACHE" || exit $?
+fi
+
+if [ -n "$DEVICE8" ]; then
+  addDevice "$DEVICE8" "$DISK_TYPE" "10" "0x13" || exit $?
+else
+  addDisk "$DISK8_FILE" "$DISK_TYPE" "disk8" "$DISK8_SIZE" "10" "0x13" "$DISK_FMT" "$DISK_IO" "$DISK_CACHE" || exit $?
+fi
+
+if [ -n "$DEVICE9" ]; then
+  addDevice "$DEVICE9" "$DISK_TYPE" "11" "0x14" || exit $?
+else
+  addDisk "$DISK9_FILE" "$DISK_TYPE" "disk9" "$DISK9_SIZE" "11" "0x14" "$DISK_FMT" "$DISK_IO" "$DISK_CACHE" || exit $?
+fi
+
+if [ -n "$DEVICE10" ]; then
+  addDevice "$DEVICE10" "$DISK_TYPE" "12" "0x15" || exit $?
+else
+  addDisk "$DISK10_FILE" "$DISK_TYPE" "disk10" "$DISK10_SIZE" "12" "0x15" "$DISK_FMT" "$DISK_IO" "$DISK_CACHE" || exit $?
+fi
+
+if [ -n "$DEVICE11" ]; then
+  addDevice "$DEVICE11" "$DISK_TYPE" "13" "0x16" || exit $?
+else
+  addDisk "$DISK11_FILE" "$DISK_TYPE" "disk11" "$DISK11_SIZE" "13" "0x16" "$DISK_FMT" "$DISK_IO" "$DISK_CACHE" || exit $?
 fi
 
 DISK_OPTS+=" -object iothread,id=io2"
